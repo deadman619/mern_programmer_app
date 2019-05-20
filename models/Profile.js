@@ -43,11 +43,11 @@ const ProfileSchema = new Schema({
 				required: true
 			},
 			from: {
-				type: Date,
+				type: String,
 				required: true
 			},
 			to: {
-				type: Date
+				type: String
 			},
 			current: {
 				type: Boolean,
@@ -73,11 +73,11 @@ const ProfileSchema = new Schema({
 				required: true
 			},
 			from: {
-				type: Date,
+				type: String,
 				required: true
 			},
 			to: {
-				type: Date
+				type: String
 			},
 			current: {
 				type: Boolean,
@@ -90,9 +90,6 @@ const ProfileSchema = new Schema({
 	],
 	social: {
 		steam: {
-			type: String
-		},
-		github: {
 			type: String
 		},
 		facebook: {

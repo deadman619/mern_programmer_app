@@ -39,11 +39,6 @@ module.exports = function validateProfileInput(data) {
 			errors.steam = 'URL is invalid';
 		}
 	}
-	if(!isEmpty(data.github)) {
-		if(!Validator.isURL(data.github)) {
-			errors.github = 'URL is invalid';
-		}
-	}
 	if(!isEmpty(data.facebook)) {
 		if(!Validator.isURL(data.facebook)) {
 			errors.facebook = 'URL is invalid';

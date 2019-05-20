@@ -39,8 +39,8 @@ export const setCurrentUser = decodedData => {
 	return {
 		type: SET_CURRENT_USER,
 		payload: decodedData
-	}
-}
+	};
+};
 
 export const logoutUser = () => dispatch => {
 	// Remove token
@@ -49,4 +49,4 @@ export const logoutUser = () => dispatch => {
 	setAuthToken(false);
 	// Remove current user
 	dispatch(setCurrentUser({}));
-}
+};

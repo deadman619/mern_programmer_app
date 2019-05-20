@@ -120,9 +120,6 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
 	if(req.body.steam) {
 		profileFields.social.steam = req.body.steam;
 	}
-	if(req.body.github) {
-		profileFields.social.github = req.body.github;
-	}
 	if(req.body.facebook) {
 		profileFields.social.facebook = req.body.facebook;
 	}
