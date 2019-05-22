@@ -34,7 +34,7 @@ router.get('/:id', (req, res) => {
 // @access 	Private
 router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
 	const {errors, isValid} = validatePostInput(req.body);
-	if(!isValid) {
+	if (!isValid) {
 		return res.status(400).json(errors);
 	}
 	const newPost = new Post({
@@ -53,7 +53,7 @@ router.delete('/:id', passport.authenticate('jwt', {session: false}), (req, res)
 	Profile.findOne({user: req.user.id})
 	.then(profile => {
 		Post.findById(req.params.id).then(post => {
-			if(post.user.toString() !== req.user.id) {
+			if (post.user.toString() !== req.user.id) {
 				return res.status(401).json({authorization: 'User not authorized'});
 			}
 			post.remove().then(() => res.json({success: true}));
@@ -69,7 +69,7 @@ router.post('/upvote/:id', passport.authenticate('jwt', {session: false}), (req,
 	Profile.findOne({user: req.user.id})
 	.then(profile => {
 		Post.findById(req.params.id).then(post => {
-			if(post.upvotes.filter(upvote => upvote.user.toString() === req.user.id).length > 0) {
+			if (post.upvotes.filter(upvote => upvote.user.toString() === req.user.id).length > 0) {
 				return res.status(400).json({upvote: 'User already upvoted this post'});
 			}
 			post.upvotes.unshift({user: req.user.id});
@@ -85,7 +85,7 @@ router.post('/upvote/:id', passport.authenticate('jwt', {session: false}), (req,
 router.post('/removeupvote/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
 	Profile.findOne({user: req.user.id}).then(profile => {
 		Post.findById(req.params.id).then(post => {
-			if(post.upvotes.filter(upvote => upvote.user.toString() === req.user.id).length == 0) {
+			if (post.upvotes.filter(upvote => upvote.user.toString() === req.user.id).length == 0) {
 				return res.status(400).json({upvote: 'You have not upvoted this post'});
 			}
 			const removeIndex = post.upvotes.map(item => item.user.toString()).indexOf(req.user.id);
@@ -101,7 +101,7 @@ router.post('/removeupvote/:id', passport.authenticate('jwt', {session: false}),
 // @access 	Private
 router.post('/comment/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
 	const {errors, isValid} = validatePostInput(req.body);
-	if(!isValid) {
+	if (!isValid) {
 		return res.status(400).json(errors);
 	}
 	Post.findById(req.params.id).then(post => {
@@ -121,12 +121,8 @@ router.post('/comment/:id', passport.authenticate('jwt', {session: false}), (req
 // @desc 	Delete comment on post
 // @access 	Private
 router.delete('/comment/:id/:comment_id', passport.authenticate('jwt', {session: false}), (req, res) => {
-	const {errors, isValid} = validatePostInput(req.body);
-	if(!isValid) {
-		return res.status(400).json(errors);
-	}
 	Post.findById(req.params.id).then(post => {
-		if(post.comments.filter(comment => comment._id.toString() === req.params.comment_id).length === 0) {
+		if (post.comments.filter(comment => comment._id.toString() === req.params.comment_id).length === 0) {
 			return res.status(404).json({comment: 'Comment with this ID does not exist'});
 		}
 		const removeIndex = post.comments.map(item => item._id.toString()).indexOf(req.params.comment_id);

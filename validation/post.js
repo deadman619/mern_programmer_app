@@ -10,12 +10,12 @@ module.exports = function validatePostInput(data) {
 	data.text = !isEmpty(data.text) ? data.text : '';
 
 	// Field content validation
-	if(!Validator.isLength(data.text, {min: 1, max: maxPostLength})) {
+	if (!Validator.isLength(data.text, {min: 1, max: maxPostLength})) {
 		errors.text = `Post length must be less or equal to ${maxPostLength} characters`;
 	}
 
 	// Empty field validation
-	if(Validator.isEmpty(data.text)) {
+	if (Validator.isEmpty(data.text)) {
 		errors.text = 'Text field is required';
 	}
 

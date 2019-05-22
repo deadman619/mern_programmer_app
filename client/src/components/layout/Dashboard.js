@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
 import { logoutUser } from '../../actions/authActions';
-import ProfileActions from '../common/ProfileActions';
+import ProfileActions from '../profile/ProfileActions';
 
 class Dashboard extends Component {
 	componentDidMount() {
@@ -23,10 +23,10 @@ class Dashboard extends Component {
 		const {user} = this.props.auth;
 		const {profile, loading} = this.props.profile;
 		let dashboardContent;
-		if(profile === null || loading) {
+		if (profile === null || loading) {
 			dashboardContent = <Spinner />
 		} else {
-			if(Object.keys(profile).length > 0) {
+			if (Object.keys(profile).length > 0) {
 				dashboardContent = (
 					<div>
 						<p className="lead text-muted">Welcome <Link to={`/profile/${profile.username}`}>{user.name}</Link></p>

@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.listen(port, () => console.log(`Server running on port ${port}`));
 
 // Connect to DB
-mongoose.connect(db)
+mongoose.connect(db, {useNewUrlParser: true})
 		.then(() => console.log('MongoDB connected successfully'))
 		.catch((error) => console.log(error));
 

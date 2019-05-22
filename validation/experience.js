@@ -12,13 +12,13 @@ module.exports = function validateExperienceInput(data) {
 	data.from = !isEmpty(data.from) ? data.from : '';
 
 	// Empty field validation
-	if(Validator.isEmpty(data.title)) {
+	if (Validator.isEmpty(data.title)) {
 		errors.title = 'Title field is required';
 	}
-	if(Validator.isEmpty(data.company)) {
+	if (Validator.isEmpty(data.company)) {
 		errors.company = 'Company field is required';
 	}
-	if(Validator.isEmpty(data.from)) {
+	if (Validator.isEmpty(data.from)) {
 		errors.from = 'From field is required';
 	}
 

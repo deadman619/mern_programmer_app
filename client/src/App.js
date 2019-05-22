@@ -15,17 +15,21 @@ import CreateProfile from './components/layout/CreateProfile';
 import EditProfile from './components/layout/EditProfile';
 import AddExperience from './components/layout/AddExperience';
 import AddEducation from './components/layout/AddEducation';
+import Profiles from './components/layout/Profiles';
+import Profile from './components/layout/Profile';
+import Posts from './components/layout/Posts';
+import Post from './components/layout/Post';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 
 // Check for token
-if(localStorage.jwtToken) {
+if (localStorage.jwtToken) {
 	setAuthToken(localStorage.jwtToken);
 	const decodedData = jwt_decode(localStorage.jwtToken);
 	store.dispatch(setCurrentUser(decodedData));
 	// Check for expired token
 	const currentTime = Date.now() / 1000;
-	if(decodedData.exp < currentTime) {
+	if (decodedData.exp < currentTime) {
 		store.dispatch(logoutUser());
 		store.dispatch(clearCurrentProfile());
 		window.location.href = '/login';
@@ -42,11 +46,15 @@ function App() {
 		    	<div className="container">
 					<Route exact path="/register" component={Register} />
 					<Route exact path="/login" component={Login} />
+					<Route exact path="/profiles" component={Profiles} />
+					<Route exact path="/profile/:username" component={Profile} />
 					<PrivateRoute exact path="/dashboard" component={Dashboard} />
 					<PrivateRoute exact path="/create-profile" component={CreateProfile} />
 					<PrivateRoute exact path="/edit-profile" component={EditProfile} />
 					<PrivateRoute exact path="/add-experience" component={AddExperience} />
 					<PrivateRoute exact path="/add-education" component={AddEducation} />
+					<PrivateRoute exact path="/feed" component={Posts} />
+					<PrivateRoute exact path="/post/:id" component={Post} />
 		    	</div>
 		    </div>
 	    </BrowserRouter>

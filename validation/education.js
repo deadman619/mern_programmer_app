@@ -13,16 +13,16 @@ module.exports = function validateExperienceInput(data) {
 	data.from = !isEmpty(data.from) ? data.from : '';
 
 	// Empty field validation
-	if(Validator.isEmpty(data.school)) {
+	if (Validator.isEmpty(data.school)) {
 		errors.school = 'School field is required';
 	}
-	if(Validator.isEmpty(data.degree)) {
+	if (Validator.isEmpty(data.degree)) {
 		errors.degree = 'Degree field is required';
 	}
-	if(Validator.isEmpty(data.field)) {
+	if (Validator.isEmpty(data.field)) {
 		errors.field = 'Study field is required';
 	}
-	if(Validator.isEmpty(data.from)) {
+	if (Validator.isEmpty(data.from)) {
 		errors.from = 'From field is required';
 	}
 

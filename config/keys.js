@@ -1,5 +1,5 @@
-// DB credentials
-module.exports = {
-	mongoURI: 'mongodb+srv://deadman619:admin123@devapp-kbq56.mongodb.net/test?retryWrites=true',
-	secretOrKey: 'secret'
-};
+if (process.env.NODE_ENV === 'production') {
+	module.exports = require('./keys_prod');
+} else {
+	module.exports = require('./keys_dev');
+}

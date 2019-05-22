@@ -17,19 +17,19 @@ router.post('/register', (req, res) => {
 	const {errors, isValid} = validateRegisterInput(req.body);
 
 	// Validate fields
-	if(!isValid) {
+	if (!isValid) {
 		return res.status(400).json(errors);
 	}
 	
 	// Proceed with registration
 	User.findOne({email: req.body.email})
 	.then(user => {
-		if(user) {
+		if (user) {
 			errors.email = 'Email already exists';
 			return res.status(400).json(errors);
 		}
 		let profileIcon = req.body.profileIcon;
-		if(!profileIcon) {
+		if (!profileIcon) {
 			profileIcon = 'https://loremflickr.com/320/240';
 		}
 		const newUser = new User({
@@ -42,7 +42,7 @@ router.post('/register', (req, res) => {
 		// Password encryption + saving new user
 		bcrypt.genSalt(10, (error, salt) => {
 			bcrypt.hash(newUser.password, salt, (error, hash) => {
-				if(error) {
+				if (error) {
 					throw error;
 				}
 				newUser.password = hash;
@@ -61,7 +61,7 @@ router.post('/login', (req, res) => {
 	const {errors, isValid} = validateLoginInput(req.body);
 
 	// Validate fields
-	if(!isValid) {
+	if (!isValid) {
 		return res.status(400).json(errors);
 	}
 
@@ -69,12 +69,12 @@ router.post('/login', (req, res) => {
 	const email = req.body.email;
 	const password = req.body.password;
 	User.findOne({email}).then(user => {
-		if(!user) {
+		if (!user) {
 			errors.email = 'Login data incorrect';
 			return res.status(400).json(errors);
 		}
 		bcrypt.compare(password, user.password).then(isMatch => {
-			if(isMatch) {
+			if (isMatch) {
 				// JWT payload
 				const payload = {id: user.id, name: user.name, profileIcon: user.profileIcon}
 

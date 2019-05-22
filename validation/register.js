@@ -17,29 +17,29 @@ module.exports = function validateRegisterInput(data) {
 	data.confirmPassword = !isEmpty(data.confirmPassword) ? data.confirmPassword : '';
 
 	// Field content validation
-	if(!Validator.isLength(data.name, {min: nameValidationMinimum, max: nameValidationMaximum})) {
+	if (!Validator.isLength(data.name, {min: nameValidationMinimum, max: nameValidationMaximum})) {
 		errors.name = `Name must be between ${nameValidationMinimum} and ${nameValidationMaximum} characters`;
 	}
-	if(!Validator.isEmail(data.email)) {
+	if (!Validator.isEmail(data.email)) {
 		errors.email = 'Email is invalid';
 	}
-	if(!Validator.isLength(data.password, {min: passwordValidationMinimum, max: passwordValidationMaximum}))
+	if (!Validator.isLength(data.password, {min: passwordValidationMinimum, max: passwordValidationMaximum}))
 		errors.password = `Password must be at least ${passwordValidationMinimum} characters long`;
-	if(!Validator.equals(data.password, data.confirmPassword)) {
+	if (!Validator.equals(data.password, data.confirmPassword)) {
 		errors.password = 'Passwords must match';
 	}
 	
 	// Empty field validation
-	if(Validator.isEmpty(data.name)) {
+	if (Validator.isEmpty(data.name)) {
 		errors.name = 'Name field is required';
 	}
-	if(Validator.isEmpty(data.email)) {
+	if (Validator.isEmpty(data.email)) {
 		errors.email = 'Email field is required';
 	}
-	if(Validator.isEmpty(data.password)) {
+	if (Validator.isEmpty(data.password)) {
 		errors.password = 'Password field is required';
 	}
-	if(Validator.isEmpty(data.confirmPassword)) {
+	if (Validator.isEmpty(data.confirmPassword)) {
 		errors.confirmPassword = 'Password confirmation field is required';
 	}
 

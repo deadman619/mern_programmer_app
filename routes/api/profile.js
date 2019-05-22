@@ -18,7 +18,7 @@ router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
 	Profile.findOne({user: req.user.id})
 	.populate('user', ['name', 'profileIcon'])
 	.then(profile => {
-		if(!profile) {
+		if (!profile) {
 			errors.noProfile = 'User profile does not exist';
 			return res.status(404).json(errors);
 		}
@@ -35,7 +35,7 @@ router.get('/all', (req, res) => {
 	Profile.find()
 	.populate('user', ['name', 'profileIcon'])
 	.then(profiles => {
-		if(!profiles) {
+		if (!profiles) {
 			errors.noProfile = 'There are no profiles';
 			return res.status(404).json(errors);
 		}
@@ -52,7 +52,7 @@ router.get('/user/:username', (req, res) => {
 	Profile.findOne({username: req.params.username})
 	.populate('user', ['name', 'profileIcon'])
 	.then(profile => {
-		if(!profile) {
+		if (!profile) {
 			errors.noProfile = 'User profile does not exist';
 			res.status(404).json(errors);
 		}
@@ -69,7 +69,7 @@ router.get('/id/:user_id', (req, res) => {
 	Profile.findOne({user: req.params.user_id})
 	.populate('user', ['name', 'profileIcon'])
 	.then(profile => {
-		if(!profile) {
+		if (!profile) {
 			errors.noProfile = 'User profile does not exist';
 			res.status(404).json(errors);
 		}
@@ -92,50 +92,50 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
 	// Proceed with profile creation/update
 	const profileFields = {};
 	profileFields.user = req.user.id;
-	if(req.body.username) {
+	if (req.body.username) {
 		profileFields.username = req.body.username;
 	}
-	if(req.body.website) {
+	if (req.body.website) {
 		profileFields.website = req.body.website;
 	}
-	if(req.body.location) {
+	if (req.body.location) {
 		profileFields.location = req.body.location;
 	}
-	if(req.body.status) {
+	if (req.body.status) {
 		profileFields.status = req.body.status;
 	}
-	if(typeof req.body.skills !== 'undefined') {
+	if (typeof req.body.skills !== 'undefined') {
 		profileFields.skills = req.body.skills.split(',');
 		profileFields.skills = profileFields.skills.map(skill => skill.trim());
 	}
-	if(req.body.bio) {
-		profileFields.bio = req.body.bio;
+	if (req.body.summary) {
+		profileFields.summary = req.body.summary;
 	}
-	if(req.body.githubUsername) {
+	if (req.body.githubUsername) {
 		profileFields.githubUsername = req.body.githubUsername;
 	}
 	
 	// Social media entries
 	profileFields.social = {};
-	if(req.body.steam) {
+	if (req.body.steam) {
 		profileFields.social.steam = req.body.steam;
 	}
-	if(req.body.facebook) {
+	if (req.body.facebook) {
 		profileFields.social.facebook = req.body.facebook;
 	}
-	if(req.body.lastFm) {
+	if (req.body.lastFm) {
 		profileFields.social.lastFm = req.body.lastFm;
 	}
-	if(req.body.twitter) {
+	if (req.body.twitter) {
 		profileFields.social.twitter = req.body.twitter;
 	}
-	if(req.body.linkedIn) {
+	if (req.body.linkedIn) {
 		profileFields.social.linkedIn = req.body.linkedIn;
 	}
 
 	Profile.findOne({user: req.user.id})
 	.then(profile => {
-		if(profile) {
+		if (profile) {
 			// Update profile
 			Profile.findOneAndUpdate({user: req.user.id}, {$set: profileFields}, {new: true})
 			.then(profile => res.json(profile));
@@ -143,7 +143,7 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
 			// Create profile
 			Profile.findOne({username: profileFields.username})
 			.then(profile => {
-				if(profile) {
+				if (profile) {
 					errors.username = 'Username already exists';
 					res.status(400).json(errors);
 				}

@@ -25,7 +25,7 @@ class AddExperience extends Component {
 	}
 
 	static getDerivedStateFromProps(nextProps, prevState) {
-		if(nextProps.errors) {
+		if (nextProps.errors) {
 			return {errors: nextProps.errors}
 		}
 	}

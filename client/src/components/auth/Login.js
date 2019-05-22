@@ -17,16 +17,16 @@ class Login extends Component {
 	}
 
 	componentDidMount() {
-		if(this.props.auth.isAuthenticated) {
+		if (this.props.auth.isAuthenticated) {
 			this.props.history.push('/dashboard');
 		}
 	}
 
 	static getDerivedStateFromProps(nextProps, prevState) {
-		if(nextProps.auth.isAuthenticated) {
+		if (nextProps.auth.isAuthenticated) {
 			return {auth: true};
 		}
-		if(nextProps.errors !== prevState.errors) {
+		if (nextProps.errors !== prevState.errors) {
 			return {errors: nextProps.errors};
 		}
 		return null;
